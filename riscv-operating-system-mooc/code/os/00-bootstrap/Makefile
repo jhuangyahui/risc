@@ -14,7 +14,7 @@ OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS_ASM:.S=.o))
 OBJS += $(addprefix $(OBJ_DIR)/,$(SRCS_C:.c=.o))
 
 .DEFAULT_GOAL := all
-all: os.elf
+all: $(OBJ_DIR)/os.elf
 
 # start.o must be the first in dependency!
 $(OBJ_DIR)/os.elf: ${OBJS}
