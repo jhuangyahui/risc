@@ -10,7 +10,7 @@ OBJS = $(SRCS_ASM:.S=.o)
 OBJS += $(SRCS_C:.c=.o)
 
 OBJ_DIR = objs
-OUT_OBJS = $(addprefix $(OUT_DIR)/, $(OBJS))
+OUT_OBJS = $(addprefix $(OBJ_DIR)/, $(OBJS))
 
 .DEFAULT_GOAL := all
 all: os.elf
