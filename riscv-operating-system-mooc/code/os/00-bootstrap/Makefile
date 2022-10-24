@@ -16,7 +16,7 @@ OUT_OBJS = $(addprefix $(OUT_DIR)/, $(OBJS))
 all: os.elf
 
 # start.o must be the first in dependency!
-os.elf: ${OBJS}
+$(OBJ_DIR)/os.elf: ${OUT_OBJS}
 	${CC} ${CFLAGS} -Ttext=0x80000000 -o os.elf $^
 	${OBJCOPY} -O binary os.elf os.bin
 
