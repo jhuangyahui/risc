@@ -17,7 +17,7 @@ OBJS += $(addprefix $(OBJ_DIR)/,$(SRCS_C:.c=.o))
 all: os.elf
 
 # start.o must be the first in dependency!
-os.elf: ${OBJS}
+$(OBJ_DIR)/os.elf: ${OBJS}
 	${CC} ${CFLAGS} -Ttext=0x80000000 -o os.elf $^
 	${OBJCOPY} -O binary os.elf os.bin
 
