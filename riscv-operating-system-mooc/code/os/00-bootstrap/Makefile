@@ -13,7 +13,7 @@ OBJ_DIR = objs
 OUT_OBJS = $(addprefix $(OUT_DIR)/, $(OBJS))
 
 .DEFAULT_GOAL := all
-all: $(OBJ_DIR)/os.elf
+all: os.elf
 
 # start.o must be the first in dependency!
 os.elf: ${OUT_OBJS}
