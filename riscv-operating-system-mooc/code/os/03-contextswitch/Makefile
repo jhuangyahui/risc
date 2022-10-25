@@ -12,21 +12,39 @@ SRCS_C = \
 	page.c \
 	sched.c \
 
-OBJS = $(SRCS_ASM:.S=.o)
-OBJS += $(SRCS_C:.c=.o)
+# OBJS = $(SRCS_ASM:.S=.o)
+# OBJS += $(SRCS_C:.c=.o)
+
+OBJ_DIR = objs
+OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS_ASM:.S=.o))
+OBJS += $(addprefix $(OBJ_DIR)/,$(SRCS_C:.c=.o))
 
 .DEFAULT_GOAL := all
-all: os.elf
+# all: os.elf
+all: $(OBJ_DIR)/os.elf
 
 # start.o must be the first in dependency!
-os.elf: ${OBJS}
+
+# os.elf: ${OBJS}
+# 	${CC} ${CFLAGS} -T os.ld -o os.elf $^
+# 	${OBJCOPY} -O binary os.elf os.bin
+
+# %.o : %.c
+# 	${CC} ${CFLAGS} -c -o $@ $<
+
+# %.o : %.S
+# 	${CC} ${CFLAGS} -c -o $@ $<
+
+$(OBJ_DIR)/os.elf: ${OBJS}
 	${CC} ${CFLAGS} -T os.ld -o os.elf $^
 	${OBJCOPY} -O binary os.elf os.bin
 
-%.o : %.c
+$(OBJ_DIR)/%.o : %.c
+	mkdir -p $(dir $@)
 	${CC} ${CFLAGS} -c -o $@ $<
 
-%.o : %.S
+$(OBJ_DIR)/%.o : %.S
+	mkdir -p $(dir $@)
 	${CC} ${CFLAGS} -c -o $@ $<
 
 run: all
