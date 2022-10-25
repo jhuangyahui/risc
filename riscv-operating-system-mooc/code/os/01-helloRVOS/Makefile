@@ -9,7 +9,7 @@ SRCS_C = \
 
 OBJS = $(SRCS_ASM:.S=.o)
 OBJS += $(SRCS_C:.c=.o)
-
+ 
 .DEFAULT_GOAL := all
 all: os.elf
 
