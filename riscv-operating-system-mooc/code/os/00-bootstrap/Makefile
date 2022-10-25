@@ -22,9 +22,11 @@ $(OBJ_DIR)/os.elf: ${OBJS}
 	${OBJCOPY} -O binary os.elf os.bin
 
 $(OBJ_DIR)/%.o : %.c
+	mkdir -p $(dir $@)
 	${CC} ${CFLAGS} -c -o $@ $<
 
 $(OBJ_DIR)/%.o : %.S
+	mkdir -p $(dir $@)
 	${CC} ${CFLAGS} -c -o $@ $<
 
 run: all
