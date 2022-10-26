@@ -1,7 +1,7 @@
 include ../../common.mk
 
 SRCS_ASM = \
-	$(START_UP)/start.S \
+	start.S \
 
 SRCS_C = \
 	kernel.c \
@@ -11,7 +11,7 @@ START_UP = startup
 KERNEL = kernel
 OBJ_DIR = objs
 
-OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS_ASM:.S=$../.o))
+OBJS = $(addprefix $(OBJ_DIR)/,$(START_UP)/$(SRCS_ASM:.S=.o))
 # OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS_ASM:.S=.o))
 OBJS += $(addprefix $(KERNEL)/,$(SRCS_C:.c=.o))
 
