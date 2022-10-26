@@ -11,8 +11,7 @@ START_UP = startup
 KERNEL = kernel
 OBJ_DIR = objs
 
-OBJS = $(addprefix $(OBJ_DIR)/,$(START_UP/SRCS_ASM:.S=.o))
-# OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS_ASM:.S=.o))
+OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS_ASM:.S=.o))
 OBJS += $(addprefix $(KERNEL)/,$(SRCS_C:.c=.o))
 
 
@@ -29,7 +28,7 @@ $(OBJ_DIR)/%.o : %.c
 	${CC} ${CFLAGS} -c -o $@ $<
 
 
-$(OBJ_DIR)/%.o : %.S
+$(OBJ_DIR)/%.o : $(START_UP)/%.S
 	mkdir -p $(dir $@)
 	${CC} ${CFLAGS} -c -o $@ $<
 
