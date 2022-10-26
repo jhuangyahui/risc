@@ -12,8 +12,14 @@ SRCS_C = \
 	page.c \
 	sched.c \
 
-OBJS = $(SRCS_ASM:.S=.o)
-OBJS += $(SRCS_C:.c=.o)
+START_UP = startup
+KERNEL = kernel
+LIB = lib
+ASM = asm
+OBJ_DIR = objs
+
+OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS_ASM:.S=.o))
+OBJS += $(addprefix $(OBJ_DIR)/,$(SRCS_C:.c=.o))
 
 .DEFAULT_GOAL := all
 all: os.elf
@@ -23,10 +29,10 @@ os.elf: ${OBJS}
 	${CC} ${CFLAGS} -T os.ld -o os.elf $^
 	${OBJCOPY} -O binary os.elf os.bin
 
-%.o : %.c
+$(OBJ_DIR)/%.o : $(KERNEL)/%.c  $(LIB)/%.c
 	${CC} ${CFLAGS} -c -o $@ $<
 
-%.o : %.S
+$(OBJ_DIR)/%.o : $(START_UP)/%.S $(ASM)/%.S
 	${CC} ${CFLAGS} -c -o $@ $<
 
 run: all
