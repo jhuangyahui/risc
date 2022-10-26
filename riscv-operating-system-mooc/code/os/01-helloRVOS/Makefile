@@ -1,7 +1,7 @@
 include ../../common.mk
 
 SRCS_ASM = \
-	start.S \
+	$(START_UP)/start.S \
 
 SRCS_C = \
 	kernel.c \
@@ -11,7 +11,7 @@ START_UP = startup
 KERNEL = kernel
 OBJ_DIR = objs
 
-OBJS = $(addprefix $(START_UP)/,$(SRCS_ASM:.S=.o))
+OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS_ASM:.S=.o))
 OBJS += $(addprefix $(KERNEL)/,$(SRCS_C:.c=.o))
 
 
@@ -24,13 +24,11 @@ os.elf: ${OBJS}
 	${CC} ${CFLAGS} -Ttext=0x80000000 -o os.elf $^
 	${OBJCOPY} -O binary os.elf os.bin
 
-$(OBJ_DIR)/%.o : $(KERNEL)/%.c
-	mkdir -p $(dir $@)
+$(OBJ_DIR)/%.o : %.c
 	${CC} ${CFLAGS} -c -o $@ $<
 
 
-$(OBJ_DIR)/%.o :$(START_UP)/%.S
-	mkdir -p $(dir $@)
+$(OBJ_DIR)/%.o : %.S
 	${CC} ${CFLAGS} -c -o $@ $<
 
 run: all
