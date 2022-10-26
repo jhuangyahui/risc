@@ -1,7 +1,7 @@
 include ../../common.mk
 
 SRCS_ASM = \
-	start.S \
+	$(START_UP)/start.S \
 
 SRCS_C = \
 	kernel.c \
@@ -10,7 +10,10 @@ SRCS_C = \
 START_UP = startup
 KERNEL = kernel
 
-OBJS = $(addprefix $(START_UP)/,$(SRCS_ASM:.S=.o))
+# OBJS = $(addprefix $(START_UP)/,$(SRCS_ASM:.S=.o))
+# OBJS += $(addprefix $(KERNEL)/,$(SRCS_C:.c=.o))
+
+OBJS = $(SRCS_ASM:.S=.o)
 OBJS += $(addprefix $(KERNEL)/,$(SRCS_C:.c=.o))
  
 .DEFAULT_GOAL := all
