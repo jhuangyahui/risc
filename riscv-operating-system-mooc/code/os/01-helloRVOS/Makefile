@@ -1,7 +1,7 @@
 include ../../common.mk
 
 SRCS_ASM = \
-	$(START_UP)/start.S \
+	start.S \
 
 SRCS_C = \
 	kernel.c \
@@ -9,25 +9,26 @@ SRCS_C = \
 
 START_UP = startup
 KERNEL = kernel
+OBJ_DIR = objs
 
-# OBJS = $(addprefix $(START_UP)/,$(SRCS_ASM:.S=.o))
-# OBJS += $(addprefix $(KERNEL)/,$(SRCS_C:.c=.o))
-
-OBJS = $(SRCS_ASM:.S=.o)
+OBJS = $(addprefix $(START_UP)/,$(SRCS_ASM:.S=.o))
 OBJS += $(addprefix $(KERNEL)/,$(SRCS_C:.c=.o))
  
 .DEFAULT_GOAL := all
 all: os.elf
 
 # start.o must be the first in dependency!
-os.elf: ${OBJS}
-	${CC} ${CFLAGS} -Ttext=0x80000000 -o os.elf $^
+$(OBJ_DIR)/os.elf: ${OBJS}
+	${CC} ${CFLAGS} -Ttext=0x80000000 -o $(OBJ_DIR)/os.elf $^
 	${OBJCOPY} -O binary os.elf os.bin
 
-%.o : %.c
+$(OBJ_DIR)/%.o : %.c
+	mkdir -p $(dir $@)
 	${CC} ${CFLAGS} -c -o $@ $<
 
-%.o : %.S
+
+$(OBJ_DIR)/%.o : %.S
+	mkdir -p $(dir $@)
 	${CC} ${CFLAGS} -c -o $@ $<
 
 run: all
