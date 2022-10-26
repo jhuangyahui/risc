@@ -11,7 +11,8 @@ START_UP = startup
 KERNEL = kernel
 OBJ_DIR = objs
 
-OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS_ASM:.S=.o))
+OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS_ASM:.S=$../.o))
+# OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS_ASM:.S=.o))
 OBJS += $(addprefix $(KERNEL)/,$(SRCS_C:.c=.o))
 
 
