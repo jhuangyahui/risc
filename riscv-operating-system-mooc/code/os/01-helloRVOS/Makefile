@@ -12,7 +12,7 @@ KERNEL = kernel
 OBJ_DIR = objs
 
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS_ASM:.S=.o))
-OBJS += $(addprefix $(KERNEL)/,$(SRCS_C:.c=.o))
+OBJS += $(addprefix $(OBJ_DIR)/,$(SRCS_C:.c=.o))
 
 
  
@@ -24,7 +24,8 @@ os.elf: ${OBJS}
 	${CC} ${CFLAGS} -Ttext=0x80000000 -o os.elf $^
 	${OBJCOPY} -O binary os.elf os.bin
 
-$(OBJ_DIR)/%.o : %.c
+$(OBJ_DIR)/%.o : $(KERNEL)/%.c
+	mkdir -p $(dir $@)
 	${CC} ${CFLAGS} -c -o $@ $<
 
 
