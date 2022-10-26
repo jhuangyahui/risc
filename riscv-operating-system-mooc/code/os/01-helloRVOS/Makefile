@@ -29,6 +29,7 @@ $(OBJ_DIR)/%.o : %.c
 
 
 $(OBJ_DIR)/%.o : %.S
+	mkdir -p $(dir $@)
 	${CC} ${CFLAGS} -c -o $@ $<
 
 run: all
