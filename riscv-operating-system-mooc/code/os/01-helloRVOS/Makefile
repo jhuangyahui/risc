@@ -7,8 +7,11 @@ SRCS_C = \
 	kernel.c \
 	uart.c \
 
-OBJS = $(SRCS_ASM:.S=.o)
-OBJS += $(SRCS_C:.c=.o)
+START_UP = startup
+KERNEL = kernel
+
+OBJS = $(addprefix $(START_UP)/,$(SRCS_ASM:.S=.o))
+OBJS += $(addprefix $(KERNEL)/,$(SRCS_C:.c=.o))
  
 .DEFAULT_GOAL := all
 all: os.elf
