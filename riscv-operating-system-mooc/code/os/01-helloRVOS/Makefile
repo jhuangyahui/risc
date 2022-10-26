@@ -13,6 +13,8 @@ OBJ_DIR = objs
 
 OBJS = $(addprefix $(START_UP)/,$(SRCS_ASM:.S=.o))
 OBJS += $(addprefix $(KERNEL)/,$(SRCS_C:.c=.o))
+
+
  
 .DEFAULT_GOAL := all
 all: os.elf
@@ -22,12 +24,12 @@ $(OBJ_DIR)/os.elf: ${OBJS}
 	${CC} ${CFLAGS} -Ttext=0x80000000 -o $(OBJ_DIR)/os.elf $^
 	${OBJCOPY} -O binary os.elf os.bin
 
-$(OBJ_DIR)/%.o : %.c
+$(OBJ_DIR)/%.o : $(KERNEL)/%.c
 	mkdir -p $(dir $@)
 	${CC} ${CFLAGS} -c -o $@ $<
 
 
-$(OBJ_DIR)/%.o : %.S
+$(OBJ_DIR)/%.o :$(START_UP)/%.S
 	mkdir -p $(dir $@)
 	${CC} ${CFLAGS} -c -o $@ $<
 
