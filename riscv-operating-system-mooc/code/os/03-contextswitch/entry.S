@@ -100,7 +100,7 @@ switch_to:
 
 1:
 	# switch mscratch to point to the context of the next task
-	csrw	mscratch, a1
+	csrw	mscratch, a0
 
 	# Restore all GP registers
 	# Use t6 to point to the context of the new task
