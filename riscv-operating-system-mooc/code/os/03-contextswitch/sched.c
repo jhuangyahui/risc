@@ -42,7 +42,7 @@ void user_task0(void)
 	uart_puts("Task 0: Created!\n");
 	while (1) {
 		uart_puts("Task 0: Running...\n");
-		task_delay(1000);
+		// task_delay(1000);
 	}
 }
 
