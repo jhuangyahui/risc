@@ -106,6 +106,7 @@ switch_to:
 	# Use t6 to point to the context of the new task
 	mv	t6, a0
 	reg_restore t6
+	reg_restore a0
 
 	# Do actual context switching.
 	ret
