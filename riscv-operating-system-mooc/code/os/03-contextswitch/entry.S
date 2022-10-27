@@ -89,7 +89,7 @@
 .align 4
 switch_to:
 	csrrw	t6, mscratch, t6	# swap t6 and mscratch
-	#beqz	t6, 1f			# Notice: previous task may be NULL
+	beqz	t6, 1f			# Notice: previous task may be NULL
 	reg_save t6			# save context of prev task
 
 	# Save the actual t6 register, which we swapped into
@@ -100,11 +100,11 @@ switch_to:
 
 1:
 	# switch mscratch to point to the context of the next task
-	csrw	mscratch, a0
+	csrw	mscratch, a1
 
 	# Restore all GP registers
 	# Use t6 to point to the context of the new task
-	mv	t6, a0
+	mv	t6, a1
 	reg_restore t6
 
 	# Do actual context switching.
