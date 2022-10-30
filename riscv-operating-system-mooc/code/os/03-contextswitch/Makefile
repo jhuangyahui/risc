@@ -32,7 +32,13 @@ os.elf: ${OBJS}
 $(OBJ_DIR)/%.o : $(KERNEL)/%.c
 	${CC} ${CFLAGS} -c -o $@ $<
 
+$(OBJ_DIR)/%.o : $(LIB)/%.c
+	${CC} ${CFLAGS} -c -o $@ $<
+
 $(OBJ_DIR)/%.o : $(START_UP)/%.S
+	${CC} ${CFLAGS} -c -o $@ $<
+
+$(OBJ_DIR)/%.o : $(ASM)/%.S
 	${CC} ${CFLAGS} -c -o $@ $<
 
 run: all
