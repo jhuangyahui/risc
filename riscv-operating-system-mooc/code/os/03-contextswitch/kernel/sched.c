@@ -15,6 +15,7 @@ static void w_mscratch(reg_t x)
 void user_task0(void);
 void sched_init()
 {
+	uart_puts("sched_init");
 	w_mscratch(0);
 
 	ctx_task.sp = (reg_t) &task_stack[STACK_SIZE - 1];
