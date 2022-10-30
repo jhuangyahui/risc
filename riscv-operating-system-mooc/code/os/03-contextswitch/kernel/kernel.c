@@ -16,7 +16,7 @@ void start_kernel(void)
 
 	page_init();
 
-	uart_puts("Hello, RVOS!\n");
+	uart_puts("sched_init\n");
 	sched_init();
 
 	schedule();
