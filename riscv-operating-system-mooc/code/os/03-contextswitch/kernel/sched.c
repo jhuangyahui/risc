@@ -2,10 +2,13 @@
 
 /* defined in entry.S */
 extern void switch_to(struct context *next);
+extern void sys_switch(struct context *old, struct context *new);
+
 
 #define STACK_SIZE 1024
 uint8_t task_stack[STACK_SIZE];
 struct context ctx_task;
+struct context ctx_os;
 
 static void w_mscratch(reg_t x)
 {
@@ -15,17 +18,24 @@ static void w_mscratch(reg_t x)
 void user_task0(void);
 void sched_init()
 {
-	uart_puts("sched_init");
 	w_mscratch(0);
 
 	ctx_task.sp = (reg_t) &task_stack[STACK_SIZE - 1];
 	ctx_task.ra = (reg_t) user_task0;
 }
 
+// void schedule()
+// {
+// 	struct context *next = &ctx_task;
+// 	switch_to(next);
+// }
+
+
 void schedule()
 {
-	struct context *next = &ctx_task;
-	switch_to(next);
+	struct context *old = &ctx_os;
+	struct context *new = &ctx_task;
+	sys_switch(old,new);
 }
 
 /*

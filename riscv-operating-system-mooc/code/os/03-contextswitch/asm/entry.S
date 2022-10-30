@@ -112,3 +112,15 @@ switch_to:
 
 .end
 
+# void sys_switch(struct context *old, struct context *new);
+# a0: pointer to the context of old task
+# a1: pointer to the context of the new task
+
+.globl sys_switch
+.align 4
+sys_switch:
+        ctx_save a0  # a0 => struct context *old
+        ctx_load a1  # a1 => struct context *new
+        ret          # pc=ra; swtch to new task (new->ra)
+.end
+
