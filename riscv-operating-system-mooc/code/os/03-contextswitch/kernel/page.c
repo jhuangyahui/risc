@@ -84,7 +84,7 @@ void page_init()
 	 */
 	_num_pages = (HEAP_SIZE / PAGE_SIZE) - 8;
 	printf("page off");
-	printf("HEAP_START = %x, HEAP_SIZE = %x, num of pages = %d\n", HEAP_START, HEAP_SIZE, _num_pages);
+	printf("HEAP_START off = %x, HEAP_SIZE = %x, num of pages = %d\n", HEAP_START, HEAP_SIZE, _num_pages);
 	
 	struct Page *page = (struct Page *)HEAP_START;
 	for (int i = 0; i < _num_pages; i++) {
