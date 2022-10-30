@@ -29,7 +29,7 @@ os.elf: ${OBJS}
 	${CC} ${CFLAGS} -T os.ld -o os.elf $^
 	${OBJCOPY} -O binary os.elf os.bin
 
-$(OBJ_DIR)/%.o : $(KERNEL)/%.c  $(LIB)/%.c
+$(OBJ_DIR)/%.o : $(KERNEL)/%.c
 	${CC} ${CFLAGS} -c -o $@ $<
 
 $(OBJ_DIR)/%.o : $(START_UP)/%.S $(ASM)/%.S
