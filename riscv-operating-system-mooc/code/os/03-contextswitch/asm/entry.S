@@ -119,8 +119,8 @@ switch_to:
 .globl sys_switch
 .align 4
 sys_switch:
-        ctx_save a0  # a0 => struct context *old
-        ctx_load a1  # a1 => struct context *new
+        reg_save a0  # a0 => struct context *old
+        reg_restore a1  # a1 => struct context *new
         ret          # pc=ra; swtch to new task (new->ra)
 .end
 
