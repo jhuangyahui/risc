@@ -54,5 +54,5 @@ code: all
 
 .PHONY : clean
 clean:
-	rm -rf *.o *.bin *.elf
+	rm -rf $(OBJ_DIR)/*.o *.bin *.elf
 
