@@ -110,7 +110,7 @@ switch_to:
 	# Do actual context switching.
 	ret
 
-.end
+
 
 # void sys_switch(struct context *old, struct context *new);
 # a0: pointer to the context of old task
