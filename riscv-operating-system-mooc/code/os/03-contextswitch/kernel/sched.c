@@ -33,9 +33,9 @@ void sched_init()
 
 void schedule()
 {
-	struct context *old = &ctx_os;
-	struct context *new = &ctx_task;
-	sys_switch(old,new);
+	// struct context *old = &ctx_os;
+	// struct context *new = &ctx_task;
+	sys_switch(&ctx_os,&ctx_task);
 }
 
 /*
