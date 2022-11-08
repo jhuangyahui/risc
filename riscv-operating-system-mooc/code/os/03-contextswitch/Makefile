@@ -25,21 +25,34 @@ OBJS += $(addprefix $(OBJ_DIR)/,$(SRCS_C:.c=.o))
 all: os.elf
 
 # start.o must be the first in dependency!
+# $@：目标的名字
+
+# $^：构造所需文件列表所有所有文件的名字
+
+# $<：构造所需文件列表的第一个文件的名字
+
+# $?：构造所需文件列表中更新过的文件
 os.elf: ${OBJS}
 	${CC} ${CFLAGS} -T os.ld -o os.elf $^
 	${OBJCOPY} -O binary os.elf os.bin
 
-$(OBJ_DIR)/%.o : $(KERNEL)/%.c
+$(OBJ_DIR)/%.o :  $(wildcard %.c)
 	${CC} ${CFLAGS} -c -o $@ $<
 
-$(OBJ_DIR)/%.o : $(LIB)/%.c
+$(OBJ_DIR)/%.o : $(wildcard %.S)
 	${CC} ${CFLAGS} -c -o $@ $<
 
-$(OBJ_DIR)/%.o : $(START_UP)/%.S
-	${CC} ${CFLAGS} -c -o $@ $<
+# $(OBJ_DIR)/%.o : $(KERNEL)/%.c
+# 	${CC} ${CFLAGS} -c -o $@ $<
 
-$(OBJ_DIR)/%.o : $(ASM)/%.S
-	${CC} ${CFLAGS} -c -o $@ $<
+# $(OBJ_DIR)/%.o : $(LIB)/%.c
+# 	${CC} ${CFLAGS} -c -o $@ $<
+
+# $(OBJ_DIR)/%.o : $(START_UP)/%.S
+# 	${CC} ${CFLAGS} -c -o $@ $<
+
+# $(OBJ_DIR)/%.o : $(ASM)/%.S
+# 	${CC} ${CFLAGS} -c -o $@ $<
 
 run: all
 	@${QEMU} -M ? | grep virt >/dev/null || exit

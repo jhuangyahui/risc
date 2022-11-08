@@ -10,6 +10,7 @@
  * RISC-V target. We will further refine this by using -march=rv32ima
  * and -mabi=ilp32 when calling gcc.
  */
+ #輸出的執行檔會執行在 riscv 平台
 OUTPUT_ARCH( "riscv" )
 
 /*
@@ -19,6 +20,7 @@ OUTPUT_ARCH( "riscv" )
  * The argument of ENTRY command is a symbol name, here is "_start" which is
  * defined in start.S.
  */
+#程式的進入點為 _start
 ENTRY( _start )
 
 /*
@@ -44,7 +46,14 @@ ENTRY( _start )
  * QEMU-virt machine will start executing.
  * Finally LENGTH = 128M tells the linker that we have 128 megabyte of RAM.
  * The linker will double check this to make sure everything can fit.
+ * 該記憶體名稱為 ram，其屬性為:
+ * [x] W (可寫)
+ * [x] X (可執行)
+ * [x] A (可分配)
+ * [ ] R (唯讀)
+ * [ ] I (初始化)
  */
+
 MEMORY
 {
 	ram   (wxa!ri) : ORIGIN = 0x80000000, LENGTH = 128M

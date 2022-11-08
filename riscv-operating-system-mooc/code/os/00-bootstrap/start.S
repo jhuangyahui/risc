@@ -1,7 +1,7 @@
 #include "platform.h"
 
 	# size of each hart's stack is 1024 bytes
-	.equ	STACK_SIZE, 1024
+	.equ	STACK_SIZE, 1024 #define a constant
 
 	.global	_start
 
@@ -23,10 +23,10 @@ _start:
 	j	start_kernel		# hart 0 jump to c
 
 park:
-	wfi
+	wfi #wait for interrupt
 	j	park
 
 stacks:
-	.skip	STACK_SIZE * MAXNUM_CPU # allocate space for all the harts stacks
+	.skip	STACK_SIZE * MAXNUM_CPU # allocate 1024 * MAXNUM_CPU space for all the harts stacks
 
 	.end				# End of file

@@ -9,6 +9,7 @@
  * "riscv" is the name of the architecture for both 64-bit and 32-bit
  * RISC-V target. We will further refine this by using -march=rv32ima
  * and -mabi=ilp32 when calling gcc.
+ * 輸出的執行檔會執行在 riscv 平台
  */
 OUTPUT_ARCH( "riscv" )
 

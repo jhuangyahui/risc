@@ -108,7 +108,8 @@ switch_to:
 	reg_restore t6
 
 	# Do actual context switching.
-	ret
+	# jalr x0, 0(x1)，跳回ra的所在地，x1存放ra
+	ret 
 
 
 

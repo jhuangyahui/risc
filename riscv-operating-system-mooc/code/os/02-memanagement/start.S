@@ -20,7 +20,7 @@ _start:
 1:
 	sw	zero, (a0)
 	addi	a0, a0, 4
-	bltu	a0, a1, 1b
+	bltu	a0, a1, 1b #branch if less than , unsign
 2:
 	# Setup stacks, the stack grows from bottom to top, so we put the
 	# stack pointer to the very end of the stack range.

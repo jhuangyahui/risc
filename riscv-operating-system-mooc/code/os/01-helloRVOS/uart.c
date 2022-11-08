@@ -74,7 +74,7 @@ void uart_init()
 
 	/*
 	 * Setting baud rate. Just a demo here if we care about the divisor,
-	 * but for our purpose [QEMU-virt], this doesn't really do anything.
+	 * but for our purpose [QEMU-virt], this doesn't really do anything._Receive
 	 *
 	 * Notice that the divisor register DLL (divisor latch least) and DLM (divisor
 	 * latch most) have the same base address as the receiver/transmitter and the

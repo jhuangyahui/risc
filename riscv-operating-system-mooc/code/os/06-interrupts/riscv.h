@@ -64,6 +64,14 @@ static inline reg_t r_mepc()
 }
 
 /* Machine Scratch register, for early trap handler */
+/* %0 代表存取 output operand
+ * %1 代表存去 input operand
+ asm ( assembler template               組合語言內容 
+ *  : output operands                   輸出的參數
+ *  : input operands                    輸入的參數
+ *  : list of clobbered registers       組合語言執行後會改變的項目
+ *   );
+ */
 static inline void w_mscratch(reg_t x)
 {
 	asm volatile("csrw mscratch, %0" : : "r" (x));
