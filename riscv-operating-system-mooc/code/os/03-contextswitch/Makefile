@@ -36,23 +36,17 @@ os.elf: ${OBJS}
 	${CC} ${CFLAGS} -T os.ld -o os.elf $^
 	${OBJCOPY} -O binary os.elf os.bin
 
-$(OBJ_DIR)/%.o :  $(wildcard *.c)
+$(OBJ_DIR)/%.o : $(KERNEL)/%.c
 	${CC} ${CFLAGS} -c -o $@ $<
 
-$(OBJ_DIR)/%.o : $(wildcard *.S)
+$(OBJ_DIR)/%.o : $(LIB)/%.c
 	${CC} ${CFLAGS} -c -o $@ $<
 
-# $(OBJ_DIR)/%.o : $(KERNEL)/%.c
-# 	${CC} ${CFLAGS} -c -o $@ $<
+$(OBJ_DIR)/%.o : $(START_UP)/%.S
+	${CC} ${CFLAGS} -c -o $@ $<
 
-# $(OBJ_DIR)/%.o : $(LIB)/%.c
-# 	${CC} ${CFLAGS} -c -o $@ $<
-
-# $(OBJ_DIR)/%.o : $(START_UP)/%.S
-# 	${CC} ${CFLAGS} -c -o $@ $<
-
-# $(OBJ_DIR)/%.o : $(ASM)/%.S
-# 	${CC} ${CFLAGS} -c -o $@ $<
+$(OBJ_DIR)/%.o : $(ASM)/%.S
+	${CC} ${CFLAGS} -c -o $@ $<
 
 run: all
 	@${QEMU} -M ? | grep virt >/dev/null || exit
