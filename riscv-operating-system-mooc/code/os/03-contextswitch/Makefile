@@ -36,10 +36,10 @@ os.elf: ${OBJS}
 	${CC} ${CFLAGS} -T os.ld -o os.elf $^
 	${OBJCOPY} -O binary os.elf os.bin
 
-$(OBJ_DIR)/%.o :  $(wildcard %.c)
+$(OBJ_DIR)/%.o :  $(wildcard *.c)
 	${CC} ${CFLAGS} -c -o $@ $<
 
-$(OBJ_DIR)/%.o : $(wildcard %.S)
+$(OBJ_DIR)/%.o : $(wildcard *.S)
 	${CC} ${CFLAGS} -c -o $@ $<
 
 # $(OBJ_DIR)/%.o : $(KERNEL)/%.c
