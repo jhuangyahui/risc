@@ -5,6 +5,7 @@ void start_kernel(void)
 {
 	uart_init();
 	uart_puts("Hello, RVOS!\n");
+	uart_isr();
 
 	while (1) {}; // stop here!
 }
