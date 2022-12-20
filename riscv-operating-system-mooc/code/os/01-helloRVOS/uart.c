@@ -132,6 +132,13 @@ void uart_isr(void)
 	while (1) {
 		int c = uart_getc();
 		uart_putc((char)c);
+		if (c==LSR_RX_READY)
+		{
+			/* code */
+			uart_putc("\n");
+		}
+		
+
 	}
 }
 
