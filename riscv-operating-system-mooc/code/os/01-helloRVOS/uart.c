@@ -64,6 +64,9 @@
 #define LSR_RX_READY (1 << 0)
 #define LSR_TX_IDLE  (1 << 5)
 
+#define FCR_POLLED (1<<0)
+
+
 #define uart_read_reg(reg) (*(UART_REG(reg)))
 #define uart_write_reg(reg, v) (*(UART_REG(reg)) = (v))
 
@@ -92,6 +95,7 @@ void uart_init()
 	uart_write_reg(LCR, lcr | (1 << 7));
 	uart_write_reg(DLL, 0x03);
 	uart_write_reg(DLM, 0x00);
+
 
 	/*
 	 * Continue setting the asynchronous data communication format.
@@ -131,14 +135,11 @@ void uart_isr(void)
 {
 	while (1) {
 		int c = uart_getc();
-		uart_putc((char)c);
-		if (c==LSR_RX_READY)
-		{
-			/* code */
-			uart_putc("\n");
+		if(c != '\r'){
+			uart_putc((char)c);
+		}else{
+			uart_putc('\n');
 		}
-		
-
 	}
 }
 
