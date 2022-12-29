@@ -3,7 +3,9 @@
 /* interval ~= 1s */
 #define TIMER_INTERVAL CLINT_TIMEBASE_FREQ
 
-static uint32_t _tick = 0;
+static uint32_t _sectick = 0;
+static uint32_t _minTick = 0;
+static uint32_t _hourTick = 0;
 
 /* load timer interval(in ticks) for next timer interrupt.*/
 void timer_load(int interval)
@@ -31,8 +33,12 @@ void timer_init()
 
 void timer_handler() 
 {
-	_tick++;
-	printf("tick: %d\n", _tick);
+	_sectick++;
+	_minTick = (_sectick/60)%60;
+	_hourTick = _minTick/60;
+	// printf("tick: %d\n", _sectick);
+
+	printf("%d:%d:%d\n", _hourTick, _minTick ,_sectick%60);
 
 	timer_load(TIMER_INTERVAL);
 }
