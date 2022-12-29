@@ -38,7 +38,7 @@ void timer_handler()
 	_hourTick = _minTick/60;
 	// printf("tick: %d\n", _sectick);
 
-	printf("%d:%d:%d\n", _hourTick, _minTick ,_sectick%60);
+	printf("%02d:%02d:%02d\n", _hourTick, _minTick ,_sectick%60);
 
 	timer_load(TIMER_INTERVAL);
 }
