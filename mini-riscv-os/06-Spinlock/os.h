@@ -9,8 +9,10 @@
 extern void user_init();
 extern void os_kernel();
 extern int os_main(void);
-extern void basic_lock();
-extern void basic_unlock();
+
+/*lock*/
+extern void basic_lock(void);
+extern void basic_unlock(void);
 
 typedef struct lock
 {

@@ -21,7 +21,7 @@ OBJDUMP = riscv64-unknown-elf-objdump
 all: os.elf
 
 os.elf: $(OBJ)
-	$(CC) $(CFLAGS) -g -Wall -T os.ld -o os.elf $^
+	$(CC) -g -Wall -T os.ld -o os.elf $^ $(CFLAGS)
 
 qemu: $(TARGET)
 	@qemu-system-riscv32 -M ? | grep virt >/dev/null || exit

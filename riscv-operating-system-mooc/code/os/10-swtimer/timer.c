@@ -40,6 +40,8 @@ void timer_init()
 
 struct timer *timer_create(void (*handler)(void *arg), void *arg, uint32_t timeout)
 {
+	printf("insert into timer_create() !\n");
+
 	/* TBD: params should be checked more, but now we just simplify this */
 	if (NULL == handler || 0 == timeout) {
 		return NULL;
@@ -89,6 +91,7 @@ void timer_delete(struct timer *timer)
 /* this routine should be called in interrupt context (interrupt is disabled) */
 static inline void timer_check()
 {
+	printf("insert into timer_check() !\n");
 	struct timer *t = &(timer_list[0]);
 	for (int i = 0; i < MAX_TIMER; i++) {
 		if (NULL != t->func) {
